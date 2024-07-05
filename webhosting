@@ -18,7 +18,6 @@ sudo apt update
    20  cd StackOverFlow--Clone
    21  ls
    22  sudo apt install libpq-dev
-   23  pip install i
    24  pip install -r requirements.txt 
    25  python3 manage.py makemigrations
    26  python3 manage.py migrate
