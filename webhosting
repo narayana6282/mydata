@@ -57,3 +57,30 @@ sudo apt update
    62  sudo supervisorctl status
    63  python3 manage.py runserver 0.0.0.0:8000
    64  gunicorn main.wsgi:application -b 0.0.0.0:8000 &
+
+
+script
+
+[program:gunicorn]
+
+directory = /home/ubuntu/stack        
+command =  /home/ubuntu/sai/bin/gunicorn --workers 3 --bind 8000  unix:/home/ubuntu/stack/app.sock main.wsgi.application
+autostart = true
+autorestart = true
+stderr_logfile = /var/log/gunicorn/gunicorn.err.log
+stdout_logfile = /var/log/gunicorn/gunicorn.out.log
+
+[group : guni]
+
+
+server {
+    server_name 13.200.243.175    ;
+    listen 80;
+    listen [::]:80;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://0.0.0.0:8000;
+    }
+}
+
