@@ -1,0 +1,43 @@
+       sudo apt update && sudo apt upgrade -y
+       sudo apt install docker.io
+       docker --version
+       docker images
+       sudo systemctl start docker
+       sudo systemctl status docker
+       docker pull tomcat
+       docker images
+       docker run -p 9898:8080 -d 61efeb1f04b6
+       docker exec -it 61efeb1f04b6 bash
+  tomcat process in docker
+       apt-get update 
+       apt-get install vim nano
+       cd webapps.dist/
+       cd manager/META-INF/
+       nano context.xml 
+       cd ../..
+       ls
+       cd host-manager/META-INF/
+       nano context.xml 
+       cd ../..
+       ls
+       cp -R * ../webapps
+       cd ..
+       ls
+       cd conf/
+      ls
+      nano tomcat-users.xml
+     cd ../../
+ apt install git
+     git clone https://github.com/Sudhakargudipati/onlinebookstore.git
+     ls
+     cd onlinebookstore/
+     ls
+     cd ..
+     apt install maven
+     cd onlinebookstore/
+     ls
+     mvn clean package
+     ls
+     cd target/
+     ls
+     cd
