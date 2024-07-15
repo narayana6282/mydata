@@ -1,0 +1,58 @@
+12  vim hosts.ini
+-------------
+node1 ansible_host=172.31.46.139  (private ip)
+node2 ansible_host=172.31.41.186  (private ip)
+
+
+13  vim installnginx.yml
+    ---------------
+
+---
+- name: install nginx
+  hosts: all
+  become: 'yes'
+  tasks:
+    - name: install nginx
+      apt:
+         name: nginx
+         state: latest
+    - name: start nginx
+      service:
+         name: nginx
+         state: started
+         enabled: 'yes'
+
+14  ansible-playbook -i hosts.ini installnginx.yml
+
+15 vim uninstallnginx.yml
+--------------------
+
+---
+- name: Remove Nginx from hosts
+  hosts: all
+  become: yes
+  tasks:
+    - name: Stop Nginx Service
+      service:
+        name: nginx
+        state: stopped
+
+    - name: Remove Nginx
+      apt:
+        name: nginx
+        state: absent
+
+16  ansible-playbook -i hosts.ini uninstallnginx.yml
+
+17  vim hosts.yml
+
+all:
+  children:
+    webservers:
+      hosts:
+        node1:
+          ansible_host: 172.31.46.139 (private ip of node1)
+        node2:
+          ansible_host: 172.31.41.186 (private ip of node2)
+
+18 ansible-playbook -i hosts.yml installnginx.yml
